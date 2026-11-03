@@ -10934,7 +10934,7 @@
   style="
     --tlc-vgal-pad-top: 80px;
     --tlc-vgal-pad-bottom: 80px;
-    --tlc-vgal-cols: 3;
+    --tlc-vgal-cols: 4;
     --tlc-vgal-radius: 16px;
     --tlc-vgal-eyebrow-size: 0.875rem;
     --tlc-vgal-heading-size: 2.125rem;
@@ -11022,6 +11022,26 @@
             </figure>
           
         
+          
+            <figure class="tlc-vgal__item" >
+              <div class="tlc-vgal__frame">
+                
+                  <video src="videos/tlc-reel-anagen-effluvium.mp4" poster="videos/tlc-reel-anagen-effluvium.jpg" controls playsinline preload="metadata"></video>
+                
+              </div>
+              
+                <figcaption>
+                  
+                    <h3 class="tlc-vgal__title">What Is Anagen Effluvium?</h3>
+                  
+                  
+                    <p class="tlc-vgal__caption">Sudden hair loss during the growth phase, often linked to medications like chemotherapy.</p>
+                  
+                </figcaption>
+              
+            </figure>
+          
+        
       </div>
     
 
@@ -11033,6 +11053,162 @@
       </div>
     
   </div>
+</section>
+
+
+<style>
+  .tlc-video {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    padding: var(--tlc-video-pad-top) 6vw var(--tlc-video-pad-bottom) 6vw;
+  }
+
+  .tlc-video__intro {
+    max-width: 720px;
+    margin: 0 auto 2.5rem auto;
+    text-align: center;
+  }
+
+  .tlc-video__eyebrow {
+    margin: 0 0 1rem 0;
+    font-weight: 500;
+    font-size: var(--tlc-video-eyebrow-size);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  .tlc-video__heading {
+    margin: 0 0 1rem 0;
+    font-weight: 300;
+    line-height: 1.25;
+    font-size: var(--tlc-video-heading-size);
+    letter-spacing: -0.01em;
+  }
+
+  .tlc-video__text {
+    margin: 0 auto;
+    font-size: var(--tlc-video-body-size);
+    line-height: 1.7;
+    opacity: 0.8;
+    max-width: 60ch;
+  }
+
+  .tlc-video__text p {
+    margin: 0;
+  }
+
+  .tlc-video__frame {
+    position: relative;
+    width: 100%;
+    max-width: var(--tlc-video-max-width);
+    margin: 0 auto;
+    aspect-ratio: var(--tlc-video-ratio);
+    overflow: hidden;
+    border-radius: var(--tlc-video-radius);
+    background: rgba(var(--color-foreground), 0.06);
+    box-shadow: 0 18px 40px -20px rgba(var(--color-foreground), 0.35);
+  }
+
+  .tlc-video__frame iframe,
+  .tlc-video__frame video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    object-fit: cover;
+  }
+
+  .tlc-video__caption {
+    max-width: var(--tlc-video-max-width);
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    font-size: var(--tlc-video-caption-size);
+    opacity: 0.65;
+  }
+
+  .tlc-video__empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: var(--tlc-video-caption-size);
+    opacity: 0.7;
+  }
+
+  .tlc-video :is(h2, [class*="eyebrow"]) {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .tlc-video :is(h1, h2, h3) {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* tlc-rt-links: links inside rich text follow the site colors */
+  .tlc-video :is(p, li, div) > a:not([class]) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(var(--color-foreground), 0.45);
+  }
+
+  /* Larger tap area on phones without changing the layout */
+  @media screen and (max-width: 749px) {
+    .tlc-video :is(p, div) > a:not([class]) {
+      position: relative;
+    }
+
+    .tlc-video :is(p, div) > a:not([class])::after {
+      content: '';
+      position: absolute;
+      inset: -12px -6px;
+    }
+  }
+</style><section
+  class="tlc-video color-scheme-1"
+  id="laser-caps"
+  style="
+    --tlc-video-pad-top: 80px;
+    --tlc-video-pad-bottom: 80px;
+    --tlc-video-max-width: 900px;
+    --tlc-video-ratio: 16 / 9;
+    --tlc-video-radius: 16px;
+    --tlc-video-eyebrow-size: 0.875rem;
+    --tlc-video-heading-size: 2.125rem;
+    --tlc-video-body-size: 1.0625rem;
+    --tlc-video-caption-size: 0.875rem;
+  "
+>
+  
+    <div class="tlc-video__intro">
+      
+        <p class="tlc-video__eyebrow">Laser Therapy</p>
+      
+      
+        <h2 class="tlc-video__heading">Choosing the Right Laser Cap</h2>
+      
+      
+        <div class="tlc-video__text"><p>How at-home laser caps work and how to choose the right model for your hair loss. <a href="/pages/services#laser-therapy">See laser therapy services</a>.</p></div>
+      
+    </div>
+  
+
+  <div class="tlc-video__frame">
+    
+      <video src="videos/tlc-choosing-a-laser-cap.mp4" poster="videos/tlc-choosing-a-laser-cap.jpg" controls playsinline preload="metadata"></video>
+    
+  </div>
+
+  
+    <p class="tlc-video__caption">Ask me which laser cap fits your plan during your consultation.</p>
+  
 </section>
 
 
