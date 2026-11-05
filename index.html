@@ -11361,6 +11361,581 @@
 
 
 <style>
+  .tlc-cgal {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    padding: var(--tlc-cgal-pad-top) 6vw var(--tlc-cgal-pad-bottom) 6vw;
+    scroll-margin-top: 80px;
+  }
+
+  .tlc-cgal__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .tlc-cgal__intro {
+    max-width: 680px;
+    margin: 0 auto 2.75rem auto;
+    text-align: center;
+  }
+
+  .tlc-cgal__eyebrow {
+    margin: 0 0 0.85rem 0;
+    font-weight: 500;
+    font-size: var(--tlc-cgal-eyebrow-size);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  .tlc-cgal__heading {
+    margin: 0 0 1rem 0;
+    font-weight: 300;
+    line-height: 1.2;
+    font-size: var(--tlc-cgal-heading-size);
+    letter-spacing: -0.01em;
+  }
+
+  .tlc-cgal__subheading {
+    margin: 0;
+    font-size: var(--tlc-cgal-subheading-size);
+    line-height: 1.7;
+    opacity: 0.8;
+  }
+
+  .tlc-cgal__subheading p {
+    margin: 0;
+  }
+
+  .tlc-cgal__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+
+  @media screen and (min-width: 900px) {
+    .tlc-cgal__grid {
+      grid-template-columns: repeat(var(--tlc-cgal-cols), minmax(0, 1fr));
+      gap: 1.75rem;
+    }
+  }
+
+  .tlc-cgal__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .tlc-cgal__cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--tlc-cgal-radius);
+    background: rgba(var(--color-foreground), 0.06);
+    box-shadow: 0 18px 40px -24px rgba(var(--color-foreground), 0.45);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .tlc-cgal__card:hover .tlc-cgal__cover,
+  .tlc-cgal__card:focus-visible .tlc-cgal__cover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 48px -24px rgba(var(--color-foreground), 0.55);
+  }
+
+  .tlc-cgal__card:focus-visible {
+    outline: none;
+  }
+
+  .tlc-cgal__card:focus-visible .tlc-cgal__cover {
+    outline: 2px solid rgb(var(--color-button, var(--color-foreground)));
+    outline-offset: 3px;
+  }
+
+  .tlc-cgal__count {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 40px;
+    background: rgba(35, 48, 42, 0.78);
+    color: #F6F5F0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .tlc-cgal__count svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .tlc-cgal__title {
+    margin: 0.9rem 0 0.3rem 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: var(--tlc-cgal-title-size);
+    line-height: 1.35;
+  }
+
+  .tlc-cgal__desc {
+    margin: 0;
+    font-size: var(--tlc-cgal-text-size);
+    line-height: 1.55;
+    opacity: 0.72;
+  }
+
+  /* Viewer */
+  .tlc-cgal__viewer {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(20, 28, 24, 0.94);
+    color: #F6F5F0;
+  }
+
+  .tlc-cgal__viewer::backdrop {
+    background: rgba(20, 28, 24, 0.94);
+  }
+
+  .tlc-cgal__viewer[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tlc-cgal__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: max(0.75rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) 0.5rem max(1rem, env(safe-area-inset-left));
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .tlc-cgal__vtitle {
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tlc-cgal__vcount {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .tlc-cgal__close,
+  .tlc-cgal__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(246, 245, 240, 0.12);
+    color: #F6F5F0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .tlc-cgal__close:hover,
+  .tlc-cgal__nav:hover,
+  .tlc-cgal__close:focus-visible,
+  .tlc-cgal__nav:focus-visible {
+    background: rgba(246, 245, 240, 0.24);
+    outline: none;
+  }
+
+  .tlc-cgal__nav[disabled] {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .tlc-cgal__close svg,
+  .tlc-cgal__nav svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .tlc-cgal__stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .tlc-cgal__track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .tlc-cgal__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tlc-cgal__slide {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+  }
+
+  .tlc-cgal__slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .tlc-cgal__nav--prev,
+  .tlc-cgal__nav--next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .tlc-cgal__nav--prev { left: max(1rem, env(safe-area-inset-left)); }
+  .tlc-cgal__nav--next { right: max(1rem, env(safe-area-inset-right)); }
+
+  @media screen and (max-width: 749px) {
+    .tlc-cgal__nav--prev,
+    .tlc-cgal__nav--next {
+      display: none;
+    }
+  }
+
+  .tlc-cgal__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.75rem 1rem max(1rem, env(safe-area-inset-bottom)) 1rem;
+  }
+
+  .tlc-cgal__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(246, 245, 240, 0.35);
+    cursor: pointer;
+  }
+
+  .tlc-cgal__dot[aria-current="true"] {
+    background: #F6F5F0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tlc-cgal__cover { transition: none; }
+    .tlc-cgal__track { scroll-behavior: auto; }
+  }
+</style><section
+  class="tlc-cgal color-scheme-1"
+  id="carousels"
+  data-tlc-cgal
+  style="
+    --tlc-cgal-pad-top: 80px;
+    --tlc-cgal-pad-bottom: 80px;
+    --tlc-cgal-cols: 4;
+    --tlc-cgal-radius: 14px;
+    --tlc-cgal-eyebrow-size: 0.875rem;
+    --tlc-cgal-heading-size: 2.125rem;
+    --tlc-cgal-subheading-size: 1.0625rem;
+    --tlc-cgal-title-size: 1rem;
+    --tlc-cgal-text-size: 0.875rem;
+  "
+>
+  <div class="tlc-cgal__inner">
+    
+      <div class="tlc-cgal__intro">
+        
+          <p class="tlc-cgal__eyebrow">Visual Guides</p>
+        
+        
+          <h2 class="tlc-cgal__heading">Learn in a Few Swipes</h2>
+        
+        
+          <div class="tlc-cgal__subheading"><p>Short visual guides on the science of hair and scalp health. Tap a guide to read it slide by slide.</p></div>
+        
+      </div>
+    
+
+    <div class="tlc-cgal__grid">
+      
+        
+            <button
+              type="button"
+              class="tlc-cgal__card"
+              data-title="Why DHT Actually Causes Hair Loss"
+              data-slides="images/tlc-carousel-dht-1.jpg|images/tlc-carousel-dht-2.jpg|images/tlc-carousel-dht-3.jpg|images/tlc-carousel-dht-4.jpg|images/tlc-carousel-dht-5.jpg|images/tlc-carousel-dht-6.jpg|images/tlc-carousel-dht-7.jpg|images/tlc-carousel-dht-8.jpg|images/tlc-carousel-dht-9.jpg|"
+              aria-label="View Why DHT Actually Causes Hair Loss, 9 slides"
+              
+            >
+              <span class="tlc-cgal__cover">
+                <img
+                  src="images/tlc-carousel-dht-1.jpg"
+                  srcset="images/tlc-carousel-dht-1.jpg 400w, images/tlc-carousel-dht-1.jpg 600w, images/tlc-carousel-dht-1.jpg 900w"
+                  sizes="(min-width: 900px) 25vw, 50vw"
+                  alt=""
+                  width="900"
+                  height="1125"
+                  loading="lazy"
+                  style="width: 100% !important; max-width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;"
+                >
+                <span class="tlc-cgal__count"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><rect x="2" y="4" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 2h7.5A1.5 1.5 0 0114 3.5V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>9 slides</span>
+              </span>
+              
+                <span class="tlc-cgal__title">Why DHT Actually Causes Hair Loss</span>
+              
+              
+                <span class="tlc-cgal__desc">How DHT forms, which follicles it targets, and why they shrink.</span>
+              
+            </button>
+          
+        
+      
+        
+            <button
+              type="button"
+              class="tlc-cgal__card"
+              data-title="The Hidden Science of Hair Miniaturization"
+              data-slides="images/tlc-carousel-miniaturization-1.jpg|images/tlc-carousel-miniaturization-2.jpg|images/tlc-carousel-miniaturization-3.jpg|images/tlc-carousel-miniaturization-4.jpg|images/tlc-carousel-miniaturization-5.jpg|images/tlc-carousel-miniaturization-6.jpg|images/tlc-carousel-miniaturization-7.jpg|"
+              aria-label="View The Hidden Science of Hair Miniaturization, 7 slides"
+              
+            >
+              <span class="tlc-cgal__cover">
+                <img
+                  src="images/tlc-carousel-miniaturization-1.jpg"
+                  srcset="images/tlc-carousel-miniaturization-1.jpg 400w, images/tlc-carousel-miniaturization-1.jpg 600w, images/tlc-carousel-miniaturization-1.jpg 900w"
+                  sizes="(min-width: 900px) 25vw, 50vw"
+                  alt=""
+                  width="900"
+                  height="1125"
+                  loading="lazy"
+                  style="width: 100% !important; max-width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;"
+                >
+                <span class="tlc-cgal__count"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><rect x="2" y="4" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 2h7.5A1.5 1.5 0 0114 3.5V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>7 slides</span>
+              </span>
+              
+                <span class="tlc-cgal__title">The Hidden Science of Hair Miniaturization</span>
+              
+              
+                <span class="tlc-cgal__desc">Why thinning is a slow cellular process, and what supports recovery.</span>
+              
+            </button>
+          
+        
+      
+        
+            <button
+              type="button"
+              class="tlc-cgal__card"
+              data-title="The 3 Layers of the Scalp"
+              data-slides="images/tlc-carousel-scalp-layers-1.jpg|images/tlc-carousel-scalp-layers-2.jpg|images/tlc-carousel-scalp-layers-3.jpg|images/tlc-carousel-scalp-layers-4.jpg|images/tlc-carousel-scalp-layers-5.jpg|"
+              aria-label="View The 3 Layers of the Scalp, 5 slides"
+              
+            >
+              <span class="tlc-cgal__cover">
+                <img
+                  src="images/tlc-carousel-scalp-layers-1.jpg"
+                  srcset="images/tlc-carousel-scalp-layers-1.jpg 400w, images/tlc-carousel-scalp-layers-1.jpg 600w, images/tlc-carousel-scalp-layers-1.jpg 900w"
+                  sizes="(min-width: 900px) 25vw, 50vw"
+                  alt=""
+                  width="900"
+                  height="1125"
+                  loading="lazy"
+                  style="width: 100% !important; max-width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;"
+                >
+                <span class="tlc-cgal__count"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><rect x="2" y="4" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 2h7.5A1.5 1.5 0 0114 3.5V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>5 slides</span>
+              </span>
+              
+                <span class="tlc-cgal__title">The 3 Layers of the Scalp</span>
+              
+              
+                <span class="tlc-cgal__desc">The epidermis, dermis, and hypodermis, and what each one does for your hair.</span>
+              
+            </button>
+          
+        
+      
+        
+            <button
+              type="button"
+              class="tlc-cgal__card"
+              data-title="Low-Level Laser Therapy"
+              data-slides="images/tlc-carousel-laser-therapy-1.jpg|images/tlc-carousel-laser-therapy-2.jpg|images/tlc-carousel-laser-therapy-3.jpg|images/tlc-carousel-laser-therapy-4.jpg|images/tlc-carousel-laser-therapy-5.jpg|images/tlc-carousel-laser-therapy-6.jpg|images/tlc-carousel-laser-therapy-7.jpg|"
+              aria-label="View Low-Level Laser Therapy, 7 slides"
+              
+            >
+              <span class="tlc-cgal__cover">
+                <img
+                  src="images/tlc-carousel-laser-therapy-1.jpg"
+                  srcset="images/tlc-carousel-laser-therapy-1.jpg 400w, images/tlc-carousel-laser-therapy-1.jpg 600w, images/tlc-carousel-laser-therapy-1.jpg 900w"
+                  sizes="(min-width: 900px) 25vw, 50vw"
+                  alt=""
+                  width="900"
+                  height="1125"
+                  loading="lazy"
+                  style="width: 100% !important; max-width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;"
+                >
+                <span class="tlc-cgal__count"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><rect x="2" y="4" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 2h7.5A1.5 1.5 0 0114 3.5V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>7 slides</span>
+              </span>
+              
+                <span class="tlc-cgal__title">Low-Level Laser Therapy</span>
+              
+              
+                <span class="tlc-cgal__desc">What 30 years of research shows about LLLT, and how to use it for results.</span>
+              
+            </button>
+          
+        
+      
+    </div>
+  </div>
+
+  <dialog class="tlc-cgal__viewer" aria-label="Carousel viewer">
+    <div class="tlc-cgal__bar">
+      <p class="tlc-cgal__vtitle"></p>
+      <p class="tlc-cgal__vcount" aria-live="polite"></p>
+      <button type="button" class="tlc-cgal__close" aria-label="Close">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="tlc-cgal__stage">
+      <div class="tlc-cgal__track" tabindex="0" aria-label="Slides"></div>
+      <button type="button" class="tlc-cgal__nav tlc-cgal__nav--prev" aria-label="Previous slide">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="tlc-cgal__nav tlc-cgal__nav--next" aria-label="Next slide">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="tlc-cgal__dots"></div>
+  </dialog>
+
+  <script>
+    (function () {
+      var root = document.currentScript && document.currentScript.closest('[data-tlc-cgal]');
+      if (!root || root.dataset.ready) return;
+      root.dataset.ready = '1';
+      var dlg = root.querySelector('.tlc-cgal__viewer');
+      var track = dlg.querySelector('.tlc-cgal__track');
+      var dots = dlg.querySelector('.tlc-cgal__dots');
+      var vtitle = dlg.querySelector('.tlc-cgal__vtitle');
+      var vcount = dlg.querySelector('.tlc-cgal__vcount');
+      var prev = dlg.querySelector('.tlc-cgal__nav--prev');
+      var next = dlg.querySelector('.tlc-cgal__nav--next');
+      var total = 0, current = 0, lastCard = null;
+
+      function go(i, smooth) {
+        i = Math.max(0, Math.min(total - 1, i));
+        track.scrollTo({ left: i * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+        mark(i);
+      }
+      function mark(i) {
+        current = i;
+        vcount.textContent = (i + 1) + ' of ' + total;
+        prev.disabled = i === 0;
+        next.disabled = i === total - 1;
+        Array.prototype.forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+      }
+      function open(card) {
+        lastCard = card;
+        var srcs = card.dataset.slides.split('|').filter(Boolean);
+        var title = card.dataset.title || '';
+        total = srcs.length;
+        vtitle.textContent = title;
+        track.innerHTML = '';
+        dots.innerHTML = '';
+        srcs.forEach(function (src, k) {
+          var s = document.createElement('div');
+          s.className = 'tlc-cgal__slide';
+          var img = document.createElement('img');
+          img.src = src;
+          img.alt = title + ', slide ' + (k + 1) + ' of ' + total;
+          img.loading = k < 2 ? 'eager' : 'lazy';
+          s.appendChild(img);
+          track.appendChild(s);
+          var d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'tlc-cgal__dot';
+          d.setAttribute('aria-label', 'Go to slide ' + (k + 1));
+          d.addEventListener('click', function () { go(k, true); });
+          dots.appendChild(d);
+        });
+        if (dlg.showModal) { dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+        document.documentElement.style.overflow = 'hidden';
+        requestAnimationFrame(function () { go(0, false); track.focus({ preventScroll: true }); });
+      }
+      function close() {
+        if (dlg.close) { dlg.close(); } else { dlg.removeAttribute('open'); }
+      }
+      dlg.addEventListener('close', function () {
+        document.documentElement.style.overflow = '';
+        if (lastCard) lastCard.focus();
+      });
+      root.querySelectorAll('.tlc-cgal__card').forEach(function (c) {
+        c.addEventListener('click', function () { open(c); });
+      });
+      dlg.querySelector('.tlc-cgal__close').addEventListener('click', close);
+      prev.addEventListener('click', function () { go(current - 1, true); });
+      next.addEventListener('click', function () { go(current + 1, true); });
+      dlg.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1, true); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1, true); }
+      });
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg || e.target.classList.contains('tlc-cgal__slide')) close();
+      });
+      var t;
+      track.addEventListener('scroll', function () {
+        clearTimeout(t);
+        t = setTimeout(function () { mark(Math.round(track.scrollLeft / Math.max(1, track.clientWidth))); }, 60);
+      });
+      window.addEventListener('resize', function () { if (dlg.open) go(current, false); });
+    })();
+  </script>
+</section>
+
+
+<style>
   .tlc-svc-group {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background: rgb(var(--color-background));
