@@ -3801,6 +3801,8 @@
                 <p class="tlc-creds__label">Scalp Health and Hair Care Specialist</p>
               
               
+                <p class="tlc-creds__sublabel">United States Trichology Institute</p>
+              
             </div>
           </div>
         
@@ -4039,8 +4041,17 @@
   }
 
   @media screen and (min-width: 900px) {
+    /* Two per row; an odd last certificate sits centered underneath */
     .tlc-certs__list--multi {
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .tlc-certs__list--multi .tlc-certs__item {
+      flex: 0 1 calc(50% - 1.5rem);
+      min-width: 0;
     }
   }
 
@@ -4162,7 +4173,7 @@
         <h2 class="tlc-certs__heading">Credentials You Can Verify</h2>
       
       
-        <div class="tlc-certs__subheading"><p>Hair transplant pre and post care is my core specialty, and my training is current.</p></div>
+        <div class="tlc-certs__subheading"><p>My training is current, from hair transplant pre and post care to scalp health and nutrition.</p></div>
       
     </div>
   
@@ -4204,6 +4215,46 @@
                 
                 
                   <span><span class="tlc-certs__date-label">Valid through</span>February 2028</span>
+                
+              </p>
+            
+          </figcaption>
+        </figure>
+      
+        <figure class="tlc-certs__item" >
+          <div class="tlc-certs__frame">
+            <div class="tlc-certs__frame-inner">
+              
+                <img
+                  src="images/scalp-health-hair-care-certificate.jpg"
+                  srcset="images/scalp-health-hair-care-certificate.jpg 800w, images/scalp-health-hair-care-certificate.jpg 1200w, images/scalp-health-hair-care-certificate.jpg 1600w"
+                  sizes="(min-width: 900px) 50vw, 100vw"
+                  alt="Scalp Health &amp; Hair Care Science"
+                  width="1100"
+                  height="828"
+                  loading="lazy"
+                  class="tlc-certs__image"
+                  style="width: 100% !important; max-width: 100% !important; height: auto !important; display: block !important;"
+                >
+              
+            </div>
+          </div>
+          <figcaption class="tlc-certs__caption">
+            <div>
+              
+                <h3 class="tlc-certs__title">Scalp Health & Hair Care Science</h3>
+              
+              
+                <p class="tlc-certs__issuer">United States Trichology Institute (USTI)</p>
+              
+            </div>
+            
+              <p class="tlc-certs__dates">
+                
+                  <span><span class="tlc-certs__date-label">Issued</span>October 2026</span>
+                
+                
+                  <span><span class="tlc-certs__date-label">Valid through</span>October 2028</span>
                 
               </p>
             
@@ -4453,13 +4504,13 @@
             </div>
             <div class="tlc-timeline__content">
               
-                <span class="tlc-timeline__year">Certification</span>
+                <span class="tlc-timeline__year">2026</span>
               
               
                 <p class="tlc-timeline__title">Scalp Health and Hair Care Specialist</p>
               
               
-                <p class="tlc-timeline__text">Certified in scalp health and hair care, from identifying common scalp conditions to building routines that keep the scalp healthy.</p>
+                <p class="tlc-timeline__text">Completed USTI's Scalp Health & Hair Care Science course, from identifying common scalp conditions to building routines that keep the scalp healthy.</p>
               
             </div>
           </div>
